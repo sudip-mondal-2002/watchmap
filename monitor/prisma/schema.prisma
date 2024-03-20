@@ -1,0 +1,51 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Service {
+  id                Int               @id @default(autoincrement())
+  name              String            @unique
+  service_instances ServiceInstance[]
+  endpoints         EndpointService[]
+  children          ServiceEdges[]    @relation("parent")
+  parents           ServiceEdges[]    @relation("child")
+}
+
+model ServiceInstance {
+  id         Int     @id @default(autoincrement())
+  service_id Int
+  ip         String
+  port       String
+  service    Service @relation(fields: [service_id], references: [id])
+}
+
+model Endpoint {
+  id        Int               @id @default(autoincrement())
+  name      String
+  services  EndpointService[]
+  is_mapped Boolean           @default(false)
+}
+
+model EndpointService {
+  endpoint_id Int
+  service_id  Int
+  endpoint    Endpoint @relation(fields: [endpoint_id], references: [id])
+  service     Service  @relation(fields: [service_id], references: [id])
+
+  @@id([endpoint_id, service_id])
+}
+
+model ServiceEdges {
+  from_id Int
+  to_id   Int
+  from    Service @relation(fields: [from_id], references: [id], name: "parent")
+  to      Service @relation(fields: [to_id], references: [id], name: "child")
+  count   Int     @default(0)
+
+  @@id([from_id, to_id])
+}

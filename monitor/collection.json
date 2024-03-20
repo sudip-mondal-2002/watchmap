@@ -1,0 +1,154 @@
+{
+	"info": {
+		"_postman_id": "fa15d510-c7ca-4036-b5e6-2fade5b41389",
+		"name": "watchmap",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28881195"
+	},
+	"item": [
+		{
+			"name": "express 1",
+			"item": [
+				{
+					"name": "test 1",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://express-1:3001/express1-test1",
+							"protocol": "http",
+							"host": [
+								"express-1"
+							],
+							"port": "3001",
+							"path": [
+								"express1-test1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "test 2",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://express-1:3001/express1-test2",
+							"protocol": "http",
+							"host": [
+								"express-1"
+							],
+							"port": "3001",
+							"path": [
+								"express1-test2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "test 3",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://express-1:3001/express1-test3",
+							"protocol": "http",
+							"host": [
+								"express-1"
+							],
+							"port": "3001",
+							"path": [
+								"express1-test3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "express 2",
+			"item": [
+				{
+					"name": "test 1",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://express-2:3002/express2-test1",
+							"protocol": "http",
+							"host": [
+								"express-2"
+							],
+							"port": "3002",
+							"path": [
+								"express2-test1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "test 2",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://express-2:3002/express2-test2",
+							"protocol": "http",
+							"host": [
+								"express-2"
+							],
+							"port": "3002",
+							"path": [
+								"express2-test2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "test 3",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://express-2:3002/express2-test3",
+							"protocol": "http",
+							"host": [
+								"express-2"
+							],
+							"port": "3002",
+							"path": [
+								"express2-test3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.sendRequest(`http://localhost:3000/api/start-request?current_request=${pm.request.url.getPath()}`);"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.sendRequest(`http://localhost:3000/api/end-request?current_request=${pm.request.url.getPath()}`);"
+				]
+			}
+		}
+	]
+}

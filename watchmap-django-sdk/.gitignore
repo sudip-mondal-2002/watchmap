@@ -1,0 +1,3 @@
+build/*
+dist/*
+watchmap_django_sdk.egg-info/*
